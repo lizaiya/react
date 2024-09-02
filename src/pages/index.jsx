@@ -1,7 +1,10 @@
+import {Button} from "antd"
 const Index = ()=>{
     return (
         <>
-        <div>首页</div>
+        <div>
+            <Button type="primary">按钮</Button>
+        </div>
         </>
     )
 }
