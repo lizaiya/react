@@ -56,10 +56,9 @@ export const handleAuthError = (errno) => {
 };
 
 export const handleGeneralError = (errno, errmsg) => {
-  if (errno !== '0') {
+  if (errno !== 200) {
     message.error(errmsg);
     return false;
   }
-
   return true;
 };

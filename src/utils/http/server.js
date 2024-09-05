@@ -9,7 +9,7 @@ const service = axios.create({
 });
 
 service.interceptors.request.use((config) => {
-  console.log(config);
+  // console.log(config);
   config = handleChangeRequestHeader(config);
   config = handleConfigureAuth(config);
   return config;
@@ -17,12 +17,15 @@ service.interceptors.request.use((config) => {
 
 service.interceptors.response.use(
   (response) => {
+    // 网络错误码
     if (response.status !== 200) return Promise.reject(response.data);
-    handleAuthError(response.data.errno);
-    handleGeneralError(response.data.errno, response.data.errmsg);
+    // 业务错误码
+    if (response.data.code !== 200) return Promise.reject(response.data);
+
     return response;
   },
   (err) => {
+    // 捕获网络错误
     handleNetworkError(err.response.status);
     return Promise.reject(err.response);
   }
@@ -42,6 +45,9 @@ export const Get = (url, params = {}, clearFn) =>
         resolve([null, res]);
       })
       .catch((err) => {
+        // 捕获业务错误
+        handleAuthError(err.code);
+        handleGeneralError(err.code, err.msg);
         resolve([err, undefined]);
       });
   });
@@ -54,6 +60,9 @@ export const Post = (url, data, params = {}) => {
         resolve([null, result.data]);
       })
       .catch((err) => {
+        // 捕获业务错误
+        handleAuthError(err.code);
+        handleGeneralError(err.code, err.msg);
         resolve([err, undefined]);
       });
   });
