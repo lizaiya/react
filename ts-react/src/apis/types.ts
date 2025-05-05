@@ -3,10 +3,8 @@ import type { MiddlewareReturn } from './middleware';
 import type { Platform } from './method.ts';
 // 定义方法可能的返回类型
 type MethodReturn = any;
-
 // 定义方法类型，支持任意参数
 export type MethodFn = (...args: any[]) => MethodReturn | Promise<MethodReturn>;
-
 // 定义基础方法配置接口
 export type MethodConfig = {
   default: MethodFn;

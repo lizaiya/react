@@ -7,3 +7,11 @@ export const getPlatform = (): Platform => {
 export const getInfo = (info: string) => {
   return { name: 'li' };
 };
+export const info = async (info: string) => {
+  await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject('');
+    }, 1000);
+  });
+  return { name: 'li' };
+};
