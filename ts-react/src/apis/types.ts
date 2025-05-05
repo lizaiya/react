@@ -14,11 +14,11 @@ export type MethodConfig = {
 };
 // 定义 Model 的通用类型
 export type ModelType = Record<string, MethodConfig>;
-export type APIS = Record<string, ModelType>;
-// 定义包装后的方法类型，用于类型提示
+export type Models = Record<string, ModelType>;
+// 包装后的方法类型
 export type WrappedMethodFn<T extends MethodFn> = (...args: Parameters<T>) => MiddlewareReturn<Awaited<ReturnType<T>>>;
-// 新增以下类型
-export type WrappedAPIS<T extends APIS, P extends Platform> = {
+
+export type WrappedAPIS<T extends Models, P extends Platform> = {
   -readonly [Model in keyof T]: {
     -readonly [Method in keyof T[Model]]: WrappedMethodFn<
       // 优先取平台对应方法，否则取 default 方法

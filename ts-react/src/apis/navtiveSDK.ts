@@ -14,7 +14,7 @@ Object.entries(apis).forEach(([modelName, model]) => {
     const typedMethodName = methodName as keyof typeof model;
     // 获取平台特定方法或默认方法
     const platformMethod = method[platform] || method['default'];
-    // 应用中间件并赋值
+    // 中间件并赋值
     NavtiveSDK[typedModelName][typedMethodName] = middleware(platformMethod);
   });
 });

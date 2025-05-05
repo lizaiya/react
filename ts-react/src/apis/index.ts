@@ -1,10 +1,10 @@
 import model1 from './model1';
 import model2 from './model2';
-import type { APIS } from './types';
-const apis = {
+import type { Models } from './types';
+const models = {
   model1,
   model2
-} as const satisfies APIS;
+} as const satisfies Models;
 
-export type { APIS };
-export default apis;
+export type { Models };
+export default models;
